@@ -4,6 +4,8 @@ namespace UnMango.Extensions.CommandLine;
 
 public sealed class CommandBuilder(Command command)
 {
+	private Action<Command> _configure = _ => {};
+
 	public Command Build() {
 		return command;
 	}
@@ -28,6 +30,11 @@ public sealed class CommandBuilder(Command command)
 	}
 
 	public CommandBuilder With(Func<IServiceProvider, ParseResult, CancellationToken, Task<int>> action) {
+		return this;
+	}
+
+	private CommandBuilder Configure(Action<Command> configure) {
+		_configure = configure;
 		return this;
 	}
 }
