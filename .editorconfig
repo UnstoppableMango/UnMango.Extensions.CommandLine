@@ -5,6 +5,12 @@ indent_style = tab
 insert_final_newline = true
 trim_trailing_whitespace = true
 
+# ReSharper properties
+resharper_instance_members_qualify_declared_in = base_class
+resharper_object_creation_when_type_not_evident = target_typed
+resharper_place_simple_initializer_on_single_line = false
+resharper_trailing_comma_in_multiline_lists = true
+
 [*.cs]
 csharp_new_line_before_open_brace = control_blocks, types
 csharp_indent_switch_labels = false

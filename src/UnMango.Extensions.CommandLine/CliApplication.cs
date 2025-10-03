@@ -2,15 +2,18 @@ using System.CommandLine;
 
 namespace UnMango.Extensions.CommandLine;
 
-public sealed record CliApplication(RootCommand Command, InvocationConfiguration Configuration)
+public sealed class CliApplication(
+	RootCommand command,
+	InvocationConfiguration configuration,
+	IServiceProvider services)
 {
 	private static readonly RootCommand DefaultRoot = new();
 
 	public static CliApplicationBuilder CreateBuilder() => new(DefaultRoot);
 
 	public Task<int> RunAsync(IReadOnlyList<string> args, CancellationToken cancellationToken = default) {
-		var parseResult = Command.Parse(args);
+		var parseResult = command.Parse(args);
 
-		return parseResult.InvokeAsync(Configuration, cancellationToken);
+		return parseResult.InvokeAsync(configuration, cancellationToken);
 	}
 }
